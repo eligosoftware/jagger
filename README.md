@@ -2,7 +2,7 @@
   <img src="Jagger-logo.svg" alt="Jagger Logo" width="84" height="84">
   <h1>Jagger</h1>
   <p><strong>Offline-first Kanban Task Manager, Agile Sprint Tracker &amp; Time Logger</strong></p>
-  <p>Zero cloud · Single-file PC web app · Air-gapped QR sync with Android · Bilingual (EN / DE)</p>
+  <p>Zero cloud · Single-file PC web app · Bilingual (EN / DE)</p>
 </div>
 
 ---
@@ -11,7 +11,7 @@
 
 **Jagger** is a fast, self-contained task and project management application designed to work **100% offline** with no servers, accounts, or external dependencies.
 
-The desktop application lives entirely inside a single file (`Jagger.html`) that runs in any modern browser or in its own native-like desktop window via Microsoft Edge's app mode. It pairs with **Jagger for Android**, exchanging tasks and changes directly between devices using animated QR codes (`JG2` sync protocol).
+The entire application lives inside a single file (`Jagger.html`) that runs in any modern browser or in its own native-like desktop window via Microsoft Edge's app mode.
 
 ---
 
@@ -39,12 +39,6 @@ The desktop application lives entirely inside a single file (`Jagger.html`) that
 - **Header Timer Pill & Tab Clock**: Shows the currently running task and elapsed time in the top bar and browser window title (`⏱ 0:12:34 – Jagger`).
 - **Manual Time Entries & Estimates**: Log hours/minutes manually for today or past dates and track progress visually against estimated hours (with over-estimate alerts).
 
-### 📱 Air-Gapped PC ↔ Phone Sync (`JG2` Protocol)
-- **No Cloud or Wi-Fi Required**: Synchronizes data directly between PC and phone via QR codes or local sync files.
-- **Delta & Full Sync**: After the initial full sync, only modified tasks and deletion tombstones since the last confirmed sync are transmitted—typically just 1–2 QR codes.
-- **Conflict Resolution**: Per-task last-write-wins (`updatedAt` timestamp) merging, automatic task renumbering if both devices created tasks with the same number, and automatic pre-sync restore points.
-- **Technical Pipeline**: Compact positional JSON $\rightarrow$ `deflate` compression $\rightarrow$ RFC 9285 Base45 encoding $\rightarrow$ CRC-32 checksummed chunks (`JG2:<SID>:<i>:<n>:<CRC32>:<base45>`).
-
 ### 🛡️ Multi-Tier Data Safety & Backups
 1. **Browser Storage (`localStorage`)**: Saves every change automatically and syncs live across open tabs.
 2. **100-Step Undo / Redo**: Full in-memory history (`Ctrl+Z` / `Ctrl+Y`) that groups continuous typing into clean undo steps.
@@ -66,9 +60,12 @@ The desktop application lives entirely inside a single file (`Jagger.html`) that
 - Switchable between **English (`EN`)** and **German (`DE`)** at any time without reloading.
 - Automatic **Light & Dark Mode** following your operating system theme (`prefers-color-scheme`).
 
+### 📱 Mobile Sync (Coming Soon)
+- Built-in offline QR sync support for a companion **Jagger for Android** app (will be available later).
+
 ---
 
-## Getting Started (PC / Desktop)
+## Getting Started
 
 ### Option 1: Run as a Standalone Desktop App (Windows + Edge)
 1. Double-click **`Start Jagger.bat`** to open `Jagger.html` in its own dedicated Microsoft Edge app window (`--app` mode).
@@ -95,31 +92,6 @@ Simply open **`Jagger.html`** in Microsoft Edge, Google Chrome, Firefox, or Safa
 
 ---
 
-## Syncing with Jagger for Android
-
-- **PC → Phone**:
-  1. In `Jagger.html`, click **Sync** (`PC → Phone`).
-  2. On the Android app, tap the QR icon → **Scan codes from PC** and point the camera at the screen. The animated QR codes can be scanned in any order.
-- **Phone → PC**:
-  1. On the Android app, go to **Sync → Create QR picture for the PC** (or **Send as file**).
-  2. Transfer the image at full resolution (or the JSON sync file) to your PC via email, OneDrive, or USB.
-  3. Drag and drop the image/file into `Jagger.html` under **Sync → Phone → PC** (or paste with `Ctrl+V`).
-
-### Building the Android App
-The companion Android project (`JaggerAndroid`, packaged in `files.zip`) is written in **Kotlin** with **Jetpack Compose**.
-
-1. Extract the Android project folder and open it in **Android Studio** (Ladybug 2024.2 or newer): *File → Open*.
-2. Let Gradle sync (Gradle 8.11.1, Android Gradle Plugin 8.7.3, Kotlin 2.0.21, Compose, CameraX, ML Kit, ZXing).
-3. Connect a phone with USB debugging (Android 8.0 / API 26+) or start an emulator and press **Run**, or build an APK via *Build → Build App Bundle(s) / APK(s) → Build APK(s)*.
-
-#### Android Project Structure
-- `app/src/main/java/com/jagger/tasks/core/`: Data model, `JG2` sync format, merge logic, change tracking, and Excel export (kept in step with `JSYNC` in `Jagger.html`).
-- `app/src/main/java/com/jagger/tasks/data/`: Local storage and restore points.
-- `app/src/main/java/com/jagger/tasks/ui/`: Jetpack Compose screens, ViewModel, CameraX/ML Kit scanner, and QR image rendering.
-- `app/src/main/res/`: English (`values`) and German (`values-de`) string resources, icons, and themes.
-
----
-
 ## Repository Structure
 
 ```text
@@ -129,7 +101,5 @@ The companion Android project (`JaggerAndroid`, packaged in `files.zip`) is writ
 ├── Jagger.ico                   # Windows application icon
 ├── Jagger-logo.svg              # Vector brand logo
 ├── Jagger-logo.png              # Raster brand logo
-├── files.zip                    # Companion Jagger for Android source archive
-├── Backups/                     # Local folder for daily/manual JSON backups
 └── README.md                    # Project documentation
 ```
