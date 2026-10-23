@@ -9,9 +9,9 @@
 
 ## Overview
 
-**Jagger** is a fast, self-contained task and project management application designed to work **100% offline** with no servers, accounts, or external dependencies.
+**Jagger** is a fast, simple, and secure task and project management application built for people who work on a **PC or laptop** and want full control over their data—working **100% offline** with no servers, cloud accounts, or external dependencies.
 
-The entire application lives inside a single file (`Jagger.html`) that runs in any modern browser or in its own native-like desktop window via Microsoft Edge's app mode.
+The entire application lives inside a single file (`Jagger.html`) that runs in any modern desktop browser or in its own native-like window via Microsoft Edge's app mode.
 
 ---
 
@@ -59,9 +59,6 @@ The entire application lives inside a single file (`Jagger.html`) that runs in a
 ### 🌐 Bilingual & Theme-Aware
 - Switchable between **English (`EN`)** and **German (`DE`)** at any time without reloading.
 - Automatic **Light & Dark Mode** following your operating system theme (`prefers-color-scheme`).
-
-### 📱 Mobile Sync (Coming Soon)
-- Built-in offline QR sync support for a companion **Jagger for Android** app (will be available later).
 
 ---
 

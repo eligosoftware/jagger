@@ -290,6 +290,12 @@ input[type=color]{width:44px;height:30px;padding:2px;border:1px solid var(--bord
 .sync-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px;align-items:start}
 .qr-stage{background:#fff;border:1px solid var(--border);border-radius:10px;display:grid;place-items:center;padding:12px;aspect-ratio:1/1;color:#5a6676}
 .qr-stage canvas{width:100%;height:auto;image-rendering:pixelated;display:block}
+.code-stage{background:var(--surface-2);border:2px solid var(--accent);border-radius:12px;padding:28px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:210px}
+.code-digits{display:inline-flex;gap:8px;font-family:"Segoe UI Variable Display","Segoe UI",monospace;font-size:38px;font-weight:800;letter-spacing:.08em;color:var(--accent);font-variant-numeric:tabular-nums}
+.code-digits span{display:inline-grid;place-items:center;width:50px;height:62px;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;box-shadow:var(--shadow-sm)}
+.code-recv-box{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;margin-bottom:14px}
+.code-input-row{display:inline-flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap;justify-content:center}
+.code-input{width:190px!important;height:48px!important;font-size:26px!important;font-weight:750!important;letter-spacing:.25em;text-align:center;font-variant-numeric:tabular-nums}
 .qr-meta{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .qr-progress{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px}
 .qr-progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .15s}
@@ -406,7 +412,7 @@ input[type=color]{width:44px;height:30px;padding:2px;border:1px solid var(--bord
     <button class="btn primary" data-act="new-task" data-ic="plus" data-i18n-title="newTaskHint"><span class="t" data-i18n="newTask"></span></button>
     <button class="btn" data-act="new-board" data-ic="columns" data-i18n-title="newBoard"><span class="t" data-i18n="newBoard"></span></button>
     <button class="btn" data-act="export" data-ic="sheet" data-i18n-title="exportExcel"><span class="t" data-i18n="exportExcel"></span></button>
-    <button class="btn" data-act="open-sync" data-ic="phone" data-i18n-title="syncTitle"><span class="t" data-i18n="syncBtn"></span></button>
+    <!-- <button class="btn" data-act="open-sync" data-ic="phone" data-i18n-title="syncTitle"><span class="t" data-i18n="syncBtn"></span></button> -->
     <button class="btn" data-act="open-backup" data-ic="shield" data-i18n-title="backupTitle"><span class="t" data-i18n="backupBtn"></span><span class="badge-dot" id="bkDot" hidden></span></button>
     <div class="lang" role="group" aria-label="Language / Sprache">
       <button data-act="set-lang" data-id="de">DE</button><button data-act="set-lang" data-id="en">EN</button>
@@ -521,8 +527,12 @@ en:{
   syncFull:'Everything', syncFullHint:'All {n} tasks and the boards', syncSmall:'Smaller codes (for older phone cameras)',
   syncContent:'{n} tasks, {d} deleted', syncCodeOf:'Code {i} of {n}', syncCodes:'{n} QR code(s)', syncPreparing:'Preparing codes…',
   syncPause:'Pause', syncPlay:'Continue', syncSpeedSlow:'Slow', syncSpeedNormal:'Normal', syncSpeedFast:'Fast', syncSaveImg:'Save as image',
-  syncSendSteps:'On your phone, open Jagger and tap Sync → Scan from PC.|Point the camera at the code. The codes change automatically – order does not matter.|Hold steady until the phone reports that all codes were received.',
-  syncDropTitle:'Drop the QR image from your phone here', syncDropText:'or click to choose it. You can also paste an image with Ctrl+V, or drop the file the phone sent.',
+  syncSendSteps:'On your phone, open Jagger and tap Sync → Receive.|Enter the 5-digit code shown on the left and tap Connect.|Review the changes on your phone and tap Apply.',
+  syncCodeLabel:'5-digit sync code', syncCodeHint:'Enter this code in Jagger on your phone', syncCodeRefresh:'New code',
+  syncEnterTitle:'Enter 5-digit code from your phone', syncEnterHint:'On your phone, open Jagger → Sync → Send, then enter the 5-digit code here:',
+  syncConnect:'Connect', syncCodeNotFound:'No sync package found for this code (or it expired). Please generate a new code.',
+  syncQrToggle:'Offline option: QR code / file transfer',
+  syncDropTitle:'Drop the QR image or file from your phone here', syncDropText:'or click to choose it. You can also paste an image with Ctrl+V.',
   syncRecvSteps:'On your phone: Sync → Send to PC.|Send the image to this PC at full size – e.g. by email, OneDrive or USB cable. Messengers may shrink photos; if reading fails, use "Send as file" on the phone.|Drop the image (or file) here.',
   syncWorking:'Reading…', syncReading:'Reading {name}…', syncFound:'Codes found: {k} of {n}',
   syncMissing:'Still missing: code {list}. Add another image that contains them, or use the image in full size.',
@@ -616,8 +626,12 @@ de:{
   syncFull:'Alles', syncFullHint:'Alle {n} Aufgaben und die Boards', syncSmall:'Kleinere Codes (für ältere Handykameras)',
   syncContent:'{n} Aufgaben, {d} gelöscht', syncCodeOf:'Code {i} von {n}', syncCodes:'{n} QR-Code(s)', syncPreparing:'Codes werden erstellt…',
   syncPause:'Pause', syncPlay:'Weiter', syncSpeedSlow:'Langsam', syncSpeedNormal:'Normal', syncSpeedFast:'Schnell', syncSaveImg:'Als Bild speichern',
-  syncSendSteps:'Öffnen Sie Jagger auf dem Handy und tippen Sie auf Sync → Vom PC scannen.|Richten Sie die Kamera auf den Code. Die Codes wechseln automatisch – die Reihenfolge ist egal.|Ruhig halten, bis das Handy meldet, dass alle Codes empfangen wurden.',
-  syncDropTitle:'QR-Bild vom Handy hier ablegen', syncDropText:'oder klicken, um es auszuwählen. Sie können ein Bild auch mit Strg+V einfügen oder die vom Handy gesendete Datei ablegen.',
+  syncSendSteps:'Öffnen Sie Jagger auf dem Handy und tippen Sie auf Sync → Empfangen.|Geben Sie den 5-stelligen Code von links ein und tippen Sie auf Verbinden.|Prüfen Sie die Änderungen auf dem Handy und tippen Sie auf Übernehmen.',
+  syncCodeLabel:'5-stelliger Sync-Code', syncCodeHint:'Diesen Code in Jagger auf dem Handy eingeben', syncCodeRefresh:'Neuer Code',
+  syncEnterTitle:'5-stelligen Code vom Handy eingeben', syncEnterHint:'Auf dem Handy Jagger → Sync → Senden öffnen und den 5-stelligen Code hier eingeben:',
+  syncConnect:'Verbinden', syncCodeNotFound:'Keine Daten zu diesem Code gefunden (oder abgelaufen). Bitte neuen Code erzeugen.',
+  syncQrToggle:'Offline-Option: QR-Code / Dateiübertragung',
+  syncDropTitle:'QR-Bild oder Datei vom Handy hier ablegen', syncDropText:'oder klicken, um sie auszuwählen. Sie können ein Bild auch mit Strg+V einfügen.',
   syncRecvSteps:'Auf dem Handy: Sync → An PC senden.|Senden Sie das Bild in Originalgröße an diesen PC – z. B. per E-Mail, OneDrive oder USB-Kabel. Messenger verkleinern Fotos oft; falls das Lesen scheitert, nutzen Sie auf dem Handy „Als Datei senden“.|Legen Sie das Bild (oder die Datei) hier ab.',
   syncWorking:'Wird gelesen…', syncReading:'{name} wird gelesen…', syncFound:'Gefundene Codes: {k} von {n}',
   syncMissing:'Es fehlen noch: Code {list}. Fügen Sie ein weiteres Bild hinzu, das sie enthält, oder verwenden Sie das Bild in Originalgröße.',
@@ -1245,7 +1259,7 @@ function handleAct(act, id, el, e) {
     case 'edit-board': openBoardModal(id); break;
     case 'export': exportExcel(); break;
     case 'open-backup': renderBackupModal(); break;
-    case 'open-sync': openSync('send'); break;
+    // case 'open-sync': openSync('send'); break;
     case 'open-sprints': openSprints('list'); break;
     case 'sprint-new': { const sp = newSprint(); save(); render(); openSprints('detail', sp.id); break; }
     case 'sprint-open': openSprints('detail', id); break;
@@ -2195,7 +2209,7 @@ function restoreBackup(file) {
       data = JSON.parse(r.result);
       if (!data || !Array.isArray(data.boards) || !Array.isArray(data.tasks)) throw new Error('invalid');
     } catch (e) {
-      if (data && data.kind === 'sync') { try { const pkg = JSYNC.fromWire(data); openSync('recv'); setPending(pkg); renderSyncModal(); } catch (err) { toast(t('restoreFailed')); } return; }
+      // if (data && data.kind === 'sync') { try { const pkg = JSYNC.fromWire(data); openSync('recv'); setPending(pkg); renderSyncModal(); } catch (err) { toast(t('restoreFailed')); } return; }
       toast(t('restoreFailed')); return;
     }
     if (saveTimer) save();
